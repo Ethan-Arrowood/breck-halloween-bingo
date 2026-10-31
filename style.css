@@ -1,0 +1,437 @@
+:root {
+  --bg: #120a1f;
+  --orange: #ff7518;
+  --purple: #6b2fa0;
+  --green: #9be564;
+  --text: #f6eeff;
+  --text-dim: #b9a9cf;
+  --cell: #21133a;
+  --cell-edge: rgba(255, 117, 24, 0.38);
+  --title-font: "Creepster", Impact, "Arial Narrow", sans-serif;
+  --body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --max-width: 480px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding-top: env(safe-area-inset-top);
+  background:
+    radial-gradient(120% 340px at 50% 0, rgba(107, 47, 160, 0.5), transparent 100%),
+    var(--bg);
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: var(--body-font);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Header */
+
+.site-header {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: auto auto 0;
+  padding: 14px 16px 10px;
+  text-align: center;
+}
+
+h1 {
+  position: relative;
+  margin: 0;
+  color: var(--orange);
+  font-family: var(--title-font);
+  font-size: clamp(2.4rem, 12vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  text-shadow: 0 0 18px rgba(255, 117, 24, 0.5), 0 2px 0 #000;
+}
+
+.title-emoji {
+  font-size: 0.8em;
+  letter-spacing: 0;
+  text-shadow: none;
+}
+
+.subtitle {
+  position: relative;
+  margin: 4px 0 0;
+  color: var(--green);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.bats {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bat {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  font-size: 16px;
+  opacity: 0.32;
+  animation: flit 19s linear infinite;
+}
+
+.bat:nth-child(2) {
+  top: 56%;
+  font-size: 12px;
+  animation-duration: 27s;
+  animation-delay: -11s;
+}
+
+.bat:nth-child(3) {
+  top: 30%;
+  font-size: 10px;
+  animation-duration: 23s;
+  animation-delay: -18s;
+}
+
+@keyframes flit {
+  0% { transform: translate(-30px, 0); }
+  25% { transform: translate(25vw, -7px); }
+  50% { transform: translate(50vw, 6px); }
+  75% { transform: translate(75vw, -5px); }
+  100% { transform: translate(calc(100vw + 30px), 0); }
+}
+
+@media (min-width: 480px) {
+  @keyframes flit {
+    0% { transform: translate(-30px, 0); }
+    50% { transform: translate(240px, 6px); }
+    100% { transform: translate(510px, 0); }
+  }
+}
+
+/* Board */
+
+main {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto auto;
+  padding: 0 8px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.cell {
+  position: relative;
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 2px 1px;
+  overflow: hidden;
+  border: 1px solid var(--cell-edge);
+  border-radius: 9px;
+  background: linear-gradient(160deg, #2a1847, var(--cell));
+  color: var(--text);
+  font-size: clamp(9px, 2.8vw, 13px);
+  font-weight: 600;
+  line-height: 1.16;
+  text-align: center;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 80ms ease-out, background-color 120ms ease;
+}
+
+.cell:active {
+  transform: scale(0.96);
+}
+
+.cell:focus-visible,
+.action:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* Sits above the stamp so a stamped square stays readable. */
+.cell-text {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+/* The stamp is drawn entirely in CSS and tilted a little differently per cell. */
+.cell::after {
+  content: "🎃";
+  content: "🎃" / "";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(32px, 10.5vw, 46px);
+  line-height: 1;
+  opacity: 0;
+  transform: rotate(var(--tilt, -8deg)) scale(1.5);
+  pointer-events: none;
+}
+
+.cell:nth-child(3n) { --tilt: 9deg; }
+.cell:nth-child(4n + 1) { --tilt: -14deg; }
+.cell:nth-child(5n + 2) { --tilt: 5deg; }
+.cell:nth-child(7n) { --tilt: 15deg; }
+
+.cell[aria-pressed="true"] {
+  border-color: var(--orange);
+  background: #33190f;
+  box-shadow: inset 0 0 12px rgba(255, 117, 24, 0.3);
+}
+
+.cell[aria-pressed="true"] .cell-text {
+  color: #e2d8ee;
+  text-shadow: 0 0 3px #000, 0 0 3px #000, 0 1px 2px #000;
+}
+
+.cell[aria-pressed="true"]::after {
+  opacity: 0.6;
+  transform: rotate(var(--tilt, -8deg)) scale(1);
+  animation: stamp 180ms cubic-bezier(0.3, 1.5, 0.6, 1);
+}
+
+@keyframes stamp {
+  from {
+    opacity: 0;
+    transform: rotate(var(--tilt, -8deg)) scale(1.7);
+  }
+}
+
+.cell--free,
+.cell--free[aria-pressed="true"] {
+  border-color: var(--green);
+  background: radial-gradient(circle, #3a2460, var(--cell));
+  box-shadow: 0 0 12px rgba(155, 229, 100, 0.55);
+  cursor: default;
+}
+
+.cell--free[aria-pressed="true"] .cell-text {
+  color: var(--green);
+  text-shadow: none;
+  font-size: clamp(11px, 3.2vw, 15px);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.cell--free:active {
+  transform: none;
+}
+
+.cell--free::after,
+.cell--free[aria-pressed="true"]::after {
+  content: none;
+}
+
+.free-emoji {
+  display: block;
+  margin-bottom: 1px;
+  font-size: clamp(20px, 6.4vw, 28px);
+  line-height: 1;
+}
+
+.cell--win,
+.cell--win[aria-pressed="true"] {
+  border-color: var(--green);
+  box-shadow: 0 0 0 1px var(--green), 0 0 12px rgba(155, 229, 100, 0.7);
+}
+
+.cell--win[aria-pressed="true"] {
+  background: #23331a;
+}
+
+.status {
+  min-height: 1.4em;
+  margin: 8px 0 6px;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.status--flash {
+  color: var(--green);
+  animation: flash 1.6s ease-out forwards;
+}
+
+@keyframes flash {
+  0% { opacity: 0; }
+  12%, 65% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Bottom bar */
+
+.actions {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 8px 8px max(10px, env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, var(--bg) 22%);
+}
+
+.action {
+  min-height: 48px;
+  padding: 6px 4px;
+  border: 1px solid var(--purple);
+  border-radius: 11px;
+  background: #2a1647;
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.1;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.action:active {
+  background: #3b2062;
+}
+
+.action--primary {
+  border-color: var(--orange);
+  background: var(--orange);
+  color: #1c0d02;
+}
+
+.action--primary:active {
+  background: #e4620d;
+}
+
+/* Dialogs */
+
+dialog {
+  color: var(--text);
+}
+
+dialog::backdrop {
+  background: rgba(8, 4, 15, 0.78);
+}
+
+.confirm {
+  width: min(340px, calc(100vw - 32px));
+  padding: 20px 16px 16px;
+  border: 1px solid var(--purple);
+  border-radius: 16px;
+  background: #1d1033;
+}
+
+.confirm-message {
+  margin: 0 0 16px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.confirm-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.win {
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 24px;
+  border: 0;
+  background: radial-gradient(circle, rgba(107, 47, 160, 0.88), rgba(18, 10, 31, 0.97) 72%);
+}
+
+.win[open] {
+  display: grid;
+  place-items: center;
+}
+
+.win-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: win-in 420ms cubic-bezier(0.2, 1.5, 0.4, 1);
+}
+
+.win-title {
+  margin: 0;
+  color: var(--orange);
+  font-family: var(--title-font);
+  font-size: clamp(4rem, 21vw, 6.5rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 0 28px rgba(255, 117, 24, 0.75), 0 3px 0 #000;
+}
+
+.win-detail {
+  margin: 14px 0 30px;
+  color: var(--green);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.win-dismiss {
+  min-width: 180px;
+  min-height: 52px;
+  font-size: 1.0625rem;
+}
+
+@keyframes win-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bat,
+  .cell[aria-pressed="true"]::after,
+  .win-content {
+    animation: none;
+  }
+
+  .cell {
+    transition: none;
+  }
+}

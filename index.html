@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#120a1f">
+  <meta name="color-scheme" content="dark">
+  <title>Haunted Bingo</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎃</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="items.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="bats" aria-hidden="true">
+      <span class="bat">🦇</span>
+      <span class="bat">🦇</span>
+      <span class="bat">🦇</span>
+    </div>
+    <h1>Haunted Bingo <span class="title-emoji">🎃</span></h1>
+    <p class="subtitle">Breckenridge Halloween 2026</p>
+  </header>
+
+  <main>
+    <div id="board" class="board" role="group" aria-label="Bingo card"></div>
+    <p id="status" class="status" role="status"></p>
+  </main>
+
+  <nav class="actions" aria-label="Card actions">
+    <button id="new-card" class="action" type="button">New Card</button>
+    <button id="reset-stamps" class="action" type="button">Reset Stamps</button>
+    <button id="save-image" class="action action--primary" type="button">Save Image</button>
+  </nav>
+
+  <dialog id="confirm" class="confirm">
+    <form method="dialog">
+      <p id="confirm-message" class="confirm-message"></p>
+      <div class="confirm-buttons">
+        <button class="action" value="cancel">Cancel</button>
+        <button id="confirm-ok" class="action action--primary" value="ok"></button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="win" class="win">
+    <form method="dialog" class="win-content">
+      <p id="win-title" class="win-title"></p>
+      <p id="win-detail" class="win-detail"></p>
+      <button class="action action--primary win-dismiss">Dismiss</button>
+    </form>
+  </dialog>
+</body>
+</html>
