@@ -172,26 +172,21 @@
     updateBoard();
     saveAndReport();
 
-    const completed = completedLines();
-    const newLines = completed.filter((line) => !before.has(line));
-    if (newLines.length > 0) {
-      celebrate(newLines.length, completed.length);
+    if (completedLines().some((line) => !before.has(line))) {
+      celebrate();
     }
   }
 
-  function celebrate(newCount, totalCount) {
+  function celebrate() {
     if (card.cells.every((cell) => cell.checked)) {
       winTitle.textContent = 'BLACKOUT! 💀';
-      winDetail.textContent = 'Every last square. Terrifying.';
+      winDetail.textContent = 'Wow, you’re dedicated. Good job.\n\n'
+        + 'Trick or treat: there is no grand prize. But if you find Ethan Arrowood and ask him nicely, maybe he’ll buy you a drink!\n\n'
+        + 'Have a spooky Halloween!';
     } else {
-      winTitle.textContent = 'BINGO! 🎃';
-      if (newCount > 1) {
-        winDetail.textContent = `${newCount} lines at once!`;
-      } else if (totalCount > 1) {
-        winDetail.textContent = `That’s ${totalCount} lines so far.`;
-      } else {
-        winDetail.textContent = 'You got a line!';
-      }
+      winTitle.textContent = 'BINGO! 👻';
+      winDetail.textContent = 'Congrats! Ask a friend to buy you a drink or something.\n\n'
+        + 'Now keep going and see if you can fill the board!';
     }
     winDialog.showModal();
   }
@@ -329,7 +324,7 @@
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#ff7518';
     ctx.font = '104px Creepster, Impact, sans-serif';
-    ctx.fillText('Haunted Bingo 🎃', width / 2, 84);
+    ctx.fillText('Spooky Bingo 👻', width / 2, 84);
     ctx.fillStyle = '#9be564';
     ctx.font = '600 32px -apple-system, Roboto, Arial, sans-serif';
     ctx.fillText('BRECKENRIDGE HALLOWEEN 2026', width / 2, 158);
@@ -353,7 +348,7 @@
     for (let i = 0; i < bytes.length; i++) {
       buffer[i] = bytes.charCodeAt(i);
     }
-    return new File([buffer], 'haunted-bingo.png', { type: 'image/png' });
+    return new File([buffer], 'spooky-bingo.png', { type: 'image/png' });
   }
 
   function downloadFile(file) {
@@ -379,7 +374,7 @@
 
     if (navigator.canShare?.({ files: [file] })) {
       try {
-        await navigator.share({ files: [file], title: 'Haunted Bingo' });
+        await navigator.share({ files: [file], title: 'Spooky Bingo' });
         return;
       } catch (error) {
         if (error.name === 'AbortError') {
@@ -415,6 +410,10 @@
   });
 
   document.getElementById('save-image').addEventListener('click', saveImage);
+
+  document.getElementById('info').addEventListener('click', () => {
+    document.getElementById('about').showModal();
+  });
 
   card = loadCard();
   if (card) {

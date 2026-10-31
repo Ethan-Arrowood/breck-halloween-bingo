@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#120a1f">
   <meta name="color-scheme" content="dark">
-  <title>Haunted Bingo</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎃</text></svg>">
+  <title>Spooky Bingo</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&display=swap">
@@ -21,13 +21,16 @@
       <span class="bat">🦇</span>
       <span class="bat">🦇</span>
     </div>
-    <h1>Haunted Bingo <span class="title-emoji">🎃</span></h1>
+    <h1>Spooky Bingo <span class="title-emoji">👻</span></h1>
     <p class="subtitle">Breckenridge Halloween 2026</p>
   </header>
 
   <main>
     <div id="board" class="board" role="group" aria-label="Bingo card"></div>
-    <p id="status" class="status" role="status"></p>
+    <div class="status-row">
+      <p id="status" class="status" role="status"></p>
+      <button id="info" class="info-button" type="button" aria-label="About this game"><span aria-hidden="true">i</span></button>
+    </div>
   </main>
 
   <nav class="actions" aria-label="Card actions">
@@ -51,6 +54,20 @@
       <p id="win-title" class="win-title"></p>
       <p id="win-detail" class="win-detail"></p>
       <button class="action action--primary win-dismiss">Dismiss</button>
+    </form>
+  </dialog>
+
+  <dialog id="about" class="confirm about">
+    <form method="dialog">
+      <h2 class="about-title">Spooky Bingo 👻</h2>
+      <p>This is just for fun, so there are no actual prizes.</p>
+      <p>Have fun, get home safe, and have a happy spooky Halloween!</p>
+      <p class="about-credit">
+        Built by Ethan Arrowood<br>
+        <a href="https://www.instagram.com/ethan_arrowood/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://ethanarrowood.com" target="_blank" rel="noopener">Website</a>
+      </p>
+      <button class="action action--primary about-close" autofocus>Close</button>
     </form>
   </dialog>
 </body>

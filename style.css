@@ -271,12 +271,60 @@ main {
   background: #23331a;
 }
 
+.status-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  margin-top: 4px;
+}
+
 .status {
-  min-height: 1.4em;
-  margin: 8px 0 6px;
+  margin: 0;
+  padding: 0 38px;
   color: var(--text-dim);
   font-size: 0.8rem;
   text-align: center;
+}
+
+.info-button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  transform: translateY(-50%);
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.info-button span {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.8125rem;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.info-button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: -2px;
 }
 
 .status--flash {
@@ -404,11 +452,52 @@ dialog::backdrop {
 }
 
 .win-detail {
-  margin: 14px 0 30px;
-  color: var(--green);
+  max-width: 340px;
+  margin: 16px 0 28px;
+  color: var(--text);
   font-size: 1.125rem;
   font-weight: 600;
+  line-height: 1.4;
   text-align: center;
+  white-space: pre-line;
+}
+
+.about {
+  text-align: center;
+}
+
+.about-title {
+  margin: 0 0 12px;
+  color: var(--orange);
+  font-family: var(--title-font);
+  font-size: 2.25rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.about p {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.about .about-credit {
+  margin: 16px 0;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.about a {
+  display: inline-block;
+  padding: 2px 6px;
+  color: var(--green);
+  font-weight: 600;
+}
+
+.about-close {
+  width: 100%;
 }
 
 .win-dismiss {

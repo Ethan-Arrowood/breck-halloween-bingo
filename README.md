@@ -1,4 +1,4 @@
-# Haunted Bingo
+# Spooky Bingo
 
 A mobile-first Halloween bingo card for a night out in Breckenridge. It's a static page with no build step: each player gets a random card, taps squares to stamp them, and their progress is saved in that browser's `localStorage`.
 
