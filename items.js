@@ -39,6 +39,7 @@ window.BINGO_ITEMS = [
   "Bathroom mirror pic",
   "Swap a costume part",
   "Lose a piece of your costume",
+  "Costume malfunction",
   "Group photo",
   "Say “I vant to suck your...” 🦇",
 
