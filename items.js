@@ -1,54 +1,68 @@
 // The bingo item pool. Edit freely: one string per line, ideally under 28
 // characters so it fits in a square. A card uses 24 items, so keep at least 24.
 // Around 40 or more keeps cards different between players.
+// A very long word can take ­, a hyphen that only shows if the word has to split.
 window.BINGO_ITEMS = [
-  // COSTUME AND PARTY
-  "Costume you don’t get",
-  "Someone’s costume is a pun",
-  "Group costume",
-  "Couple’s costume",
-  "Basically-underwear costume",
-  "Two people, same costume",
-  "Wig, hat, or wings fall off",
-  "Costume malfunction",
-  "“I shouldn’t have worn this”",
-  "Pet in costume",
+  // BARS
+  "Get a drink at RMU",
+  "Get a drink at Chalet",
+  "Get a drink at Molly Jack’s",
+  "Get a drink at Broken Compass",
+  "Get a drink at Blue Stag",
+  "Get a drink at Napper Tandy’s",
+  "Get a drink at Gold Pan",
+  "Get a drink at Mother­loaded",
+  "Get a drink at Breck Brewery",
+  "Get a drink at Cecilia’s",
 
-  // BAT THEMED
-  "Bat wings or bat costume",
-  "Someone does a bat screech",
-  "“Na na na na” Batman chant",
-  "Someone hangs upside down",
-  "Bat ears, but not a bat",
-  "“I’m blind as a bat”",
-  "Fangs or “I vant to suck...”",
-  "“It’s a night for bats”",
-  "A bat pun gets groaned at",
-  "Up at dawn like a bat",
+  // STRANGERS
+  "Buy a stranger a drink",
+  "Kiss a stranger (consen­sually)",
+  "Dance with a stranger",
+  "Find your costume twin",
+  "Give someone your number",
+  "Get someone’s number",
+  "DFMO",
 
-  // DRINKS AND BAR CRAWL
-  "Shot in costume",
-  "Cheers with a stranger",
-  "Stranger buys a drink",
-  "Drink with a spooky name",
-  "“Last one” (it isn’t)",
+  // DARES AND DRINKS
+  "Shot ski",
+  "Shotgun a beer",
+  "Take a shot",
+  "Piggyback ride",
+  "Get a free drink",
   "Group shot",
-  "“One more round” (means it)",
-  "Costume survives the cold",
+  "Hang upside down like a bat 🦇",
+  "Say a bad pickup line",
 
-  // CHAOS AND FLIRTING
-  "Gets a number or a follow",
-  "Bad pickup line",
-  "Dance floor takes over",
-  "Karaoke or loud sing-along",
-  "Bathroom selfie in costume",
-  "Costume gets “adjusted”",
-  "Leaves with the wrong jacket",
-  "Group photo takes 10 tries",
-  "Someone loses a prop",
-  "“This is my third costume”",
+  // SOLO AND COSTUME
+  "Dance by yourself",
+  "Bathroom mirror pic",
+  "Swap a costume part",
+  "Lose a piece of your costume",
+  "Group photo",
+  "Say “I vant to suck your...” 🦇",
 
-  // LOCAL ITEMS (Ethan to fill in)
-  "Drink at RMU",
-  "Drink at the Chalet",
+  // COSTUME SPOTTING
+  "Pet in costume",
+  "Couple costume",
+  "Scary costume",
+  "Sexy costume",
+  "Group costume (3+)",
+  "Costume pun",
+  "Light-up costume",
+  "Vampire fangs 🦇",
+
+  // SPOTTING
+  "Eat candy",
+  "Spot a jack-o’-lantern",
+  "See a ghost",
+  "See a black cat",
+  "See a skeleton",
+
+  // MUSIC AND CHAOS
+  "Hear Thriller",
+  "Hear Monster Mash",
+  "Hear This Is Halloween",
+  "Hear Spooky Scary Skeletons",
+  "Start a mosh pit",
 ];

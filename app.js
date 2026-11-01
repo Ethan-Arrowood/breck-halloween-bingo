@@ -6,6 +6,7 @@
   const CELL_COUNT = SIZE * SIZE;
   const FREE_INDEX = 12;
   const FREE_TEXT = 'FREE';
+  const SOFT_HYPHEN = '­';
   const LINES = buildLines();
 
   const board = document.getElementById('board');
@@ -248,12 +249,21 @@
     const lines = [];
     let line = '';
     text.split(' ').forEach((word) => {
-      const candidate = line ? `${line} ${word}` : word;
-      if (line && ctx.measureText(candidate).width > maxWidth) {
-        lines.push(line);
-        line = word;
-      } else {
+      const plainWord = word.replaceAll(SOFT_HYPHEN, '');
+      const candidate = line ? `${line} ${plainWord}` : plainWord;
+      if (ctx.measureText(candidate).width <= maxWidth) {
         line = candidate;
+        return;
+      }
+      if (line) {
+        lines.push(line);
+      }
+      const [start, ...rest] = word.replaceAll('-', `-${SOFT_HYPHEN}`).split(SOFT_HYPHEN);
+      if (rest.length > 0 && ctx.measureText(plainWord).width > maxWidth) {
+        lines.push(start.endsWith('-') ? start : `${start}-`);
+        line = rest.join('');
+      } else {
+        line = plainWord;
       }
     });
     lines.push(line);
