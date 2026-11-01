@@ -8,6 +8,9 @@
   const FREE_TEXT = 'FREE';
   const SOFT_HYPHEN = '­';
   const LINES = buildLines();
+  // Items starting with this count as bar items, and a card holds at most MAX_BAR_ITEMS.
+  const BAR_PREFIX = 'Get a drink at';
+  const MAX_BAR_ITEMS = 2;
 
   const board = document.getElementById('board');
   const status = document.getElementById('status');
@@ -19,7 +22,8 @@
   const winDetail = document.getElementById('win-detail');
 
   const itemPool = Array.from(new Set(window.BINGO_ITEMS || []));
-  const canPlay = itemPool.length >= CELL_COUNT - 1;
+  const barItemCount = itemPool.filter(isBarItem).length;
+  const canPlay = itemPool.length - barItemCount + Math.min(barItemCount, MAX_BAR_ITEMS) >= CELL_COUNT - 1;
 
   let card = null;
 
@@ -53,8 +57,26 @@
     return result;
   }
 
+  function isBarItem(text) {
+    return text.startsWith(BAR_PREFIX);
+  }
+
+  function pickItems() {
+    const picked = [];
+    let bars = 0;
+    for (const text of shuffle(itemPool)) {
+      if (picked.length === CELL_COUNT - 1) break;
+      if (isBarItem(text)) {
+        if (bars === MAX_BAR_ITEMS) continue;
+        bars++;
+      }
+      picked.push(text);
+    }
+    return picked;
+  }
+
   function generateCard() {
-    const texts = shuffle(itemPool).slice(0, CELL_COUNT - 1);
+    const texts = pickItems();
     texts.splice(FREE_INDEX, 0, FREE_TEXT);
     return {
       cells: texts.map((text, index) => ({ text, checked: index === FREE_INDEX })),
@@ -406,7 +428,7 @@
   // Startup
 
   function disableGame() {
-    setStatus(`Add at least ${CELL_COUNT - 1} items to items.js to play.`);
+    setStatus(`Add at least ${CELL_COUNT - 1} items to items.js to play (only ${MAX_BAR_ITEMS} bar items count).`);
     document.querySelectorAll('.action').forEach((button) => {
       button.disabled = true;
     });

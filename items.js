@@ -1,6 +1,7 @@
 // The bingo item pool. Edit freely: one string per line, ideally under 28
 // characters so it fits in a square. A card uses 24 items, so keep at least 24.
 // Around 40 or more keeps cards different between players.
+// A card gets at most 2 "Get a drink at ..." items (see BAR_PREFIX in app.js).
 // A very long word can take ­, a hyphen that only shows if the word has to split.
 window.BINGO_ITEMS = [
   // BARS
