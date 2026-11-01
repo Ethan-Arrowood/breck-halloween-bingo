@@ -169,16 +169,23 @@
     card.cells[index].checked = !card.cells[index].checked;
     navigator.vibrate?.(10);
 
+    const hasNewLine = completedLines().some((line) => !before.has(line));
+    const isBlackout = hasNewLine && card.cells.every((cell) => cell.checked);
+    const isFirstBingo = hasNewLine && !isBlackout && !card.bingoShown;
+    if (isFirstBingo) {
+      card.bingoShown = true;
+    }
+
     updateBoard();
     saveAndReport();
 
-    if (completedLines().some((line) => !before.has(line))) {
-      celebrate();
+    if (isBlackout || isFirstBingo) {
+      celebrate(isBlackout);
     }
   }
 
-  function celebrate() {
-    if (card.cells.every((cell) => cell.checked)) {
+  function celebrate(isBlackout) {
+    if (isBlackout) {
       winTitle.textContent = 'BLACKOUT! 💀';
       winDetail.textContent = 'Wow, you’re dedicated. Good job.\n\n'
         + 'Trick or treat: there is no grand prize. But if you find Ethan Arrowood and ask him nicely, maybe he’ll buy you a drink!\n\n'
@@ -217,6 +224,7 @@
     card.cells.forEach((cell, index) => {
       cell.checked = index === FREE_INDEX;
     });
+    delete card.bingoShown;
     updateBoard();
     if (!saveCard()) {
       setStatus('Can’t save here: a refresh will lose this card.');
