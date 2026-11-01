@@ -215,7 +215,7 @@
         + 'Have a spooky Halloween!';
     } else {
       winTitle.textContent = 'BINGO! 👻';
-      winDetail.textContent = 'Congrats! Ask a friend to buy you a drink or something.\n\n'
+      winDetail.textContent = 'Congrats! Show this to any bartender for a free drink. Good luck with that. 😏\n\n'
         + 'Now keep going and see if you can fill the board!';
     }
     winDialog.showModal();
