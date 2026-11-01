@@ -83,6 +83,18 @@ h1 {
   text-transform: uppercase;
 }
 
+.hashtag {
+  position: relative;
+  margin: 4px 0 0;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+}
+
+.hashtag strong {
+  color: var(--orange);
+  font-weight: 600;
+}
+
 .bats {
   position: absolute;
   inset: 0;

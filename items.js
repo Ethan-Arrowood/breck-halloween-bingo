@@ -29,6 +29,7 @@ window.BINGO_ITEMS = [
   "Shotgun a beer",
   "Take a shot",
   "Piggyback ride",
+  "Dance on a table",
   "Get a free drink",
   "Group shot",
   "Hang upside down like a bat 🦇",
